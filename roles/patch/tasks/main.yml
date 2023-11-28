@@ -1,0 +1,13 @@
+---
+- name: Update and Upgrade
+  apt:
+    update_cache: yes
+    upgrade: yes
+  changed_when: false
+
+- name: Perform full patching
+  package:
+    name: '*'
+    state: latest
+
+

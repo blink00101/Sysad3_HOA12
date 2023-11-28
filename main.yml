@@ -1,0 +1,24 @@
+---
+- hosts: all
+  become: true
+  vars:
+    allowed_ssh_networks:
+      - 192.168.199.11/24
+    unnecessary_services:
+      - postfix
+    unnecessary_software:
+      - tcpdump
+      - nmap-ncat
+      - wpa_supplicant
+
+  roles:
+    - patch
+    - secureRA
+    - SecurityPI
+    - Disable
+
+  handlers:
+  - name: Reload SSH
+    service:
+      name: sshd
+      state: reloaded
